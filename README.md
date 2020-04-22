@@ -1,7 +1,7 @@
 # 비트농장
 농축산물 쇼핑몰 비트농장입니다.
 Spring Framework를 사용하여 제작했습니다.<br>
-<img src="https://user-images.githubusercontent.com/59942147/79968661-67079880-84cb-11ea-800a-abdc442302ff.png" width="80%"></img><br>
+<img src="https://user-images.githubusercontent.com/59942147/79969026-e4cba400-84cb-11ea-8483-eee0d88ccb46.png" width="80%"></img><br>
 #맡은 역할로 회원 CRUD / 고객센터 / 판매자 판매 리스트를 완성하였습니다.
 
 1. 회원에 대한 CRUD 기능을 구현하였습니다.
