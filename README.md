@@ -4,6 +4,7 @@ Spring Framework를 사용하여 제작했습니다.<br>
 <img src="https://user-images.githubusercontent.com/59942147/79969026-e4cba400-84cb-11ea-8483-eee0d88ccb46.png" width="80%"></img><br>
 
 담당 기능으로 회원 CRUD / 고객센터 / 판매자 판매 리스트를 완성하였습니다. 
+member, seller, information을 담당하여 설계하였고
 
 1. 회원가입, 수정, 탈퇴 기능을 구현하였습니다.<br>
 2. 고객센터(1:1문의, 공지사항, 고객관리 데이터)에 대한 CRUD 기능을 구현하였습니다.<br>
