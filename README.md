@@ -12,7 +12,6 @@ Spring Framework를 사용하여 제작했습니다.<br>
 5. 파일 업로드/다운로드 기능을 구현하였습니다.<br>
 
 
-<img src="https://user-images.githubusercontent.com/59942147/79969026-e4cba400-84cb-11ea-8483-eee0d88ccb46.png" width="80%"></img><br>
 <img src="https://user-images.githubusercontent.com/59942147/79983339-970e6600-84e2-11ea-93c3-3d022f7bad25.png" width="80%"></img><br>
 <img src="https://user-images.githubusercontent.com/59942147/79983427-bdcc9c80-84e2-11ea-8b62-665162ab8b54.png" width="80%"></img><br>
 
