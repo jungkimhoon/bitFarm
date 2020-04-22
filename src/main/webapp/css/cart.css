@@ -1,0 +1,44 @@
+@charset "UTF-8";
+.smallBtn{
+	width: 80pt;
+	height: 30pt;
+	color: #ffffff;
+	border: 0;
+	outline: 0;
+	background-color: #5f0080;
+	border-radius: 10px; 
+	font-weight: bold;
+	cursor: pointer;
+}
+.orderBtn{
+	width: 250pt;
+	height: 50pt;
+	color: #ffffff;
+	border: 0;
+	outline: 0;
+	background-color: #5f0080;
+	border-radius: 10px;
+	font-size: 15pt;
+	font-weight: bold;
+	cursor: pointer;
+}
+.qtyBtn{
+	width: 20pt;
+	color: #ffffff;
+	border: 0;
+	outline: 0;
+	background-color: #5f0080;
+	border-radius: 5px;
+	font-size: 13pt;
+	cursor: pointer;
+}
+.cart_item_qty{
+	width: 15pt;
+	border: none;
+	text-align: center;
+}
+.cartTable{
+	border-top: 2px solid #5f0080;
+	border-bottom: 2px solid #ddd;
+	width: 80%;
+}

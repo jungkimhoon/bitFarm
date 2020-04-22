@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="memberSQL">
+	<insert id="write" parameterType="memberDTO"> 
+		insert into member values(nvl(#{member_id},0)
+		,#{member_name}
+		,nvl(#{member_pwd},0) 
+		,#{member_email}
+		,#{member_phone} 
+		,#{member_address1}  
+		,#{member_address2} 
+		,nvl(#{member_birth},0) 
+		,1,2000,sysdate,#{member_eventAgree},#{member_loginType}) 
+	</insert> 	  
+	
+	<select id="getMemberPwd" parameterType="String" resultType="String">
+		select member_pwd from member where member_id = #{id}   
+	</select>
+	
+	<select id="checkID" parameterType="String" resultType="int">
+		select count(*) from member where member_id = #{id}    
+	</select> 	
+	
+	<select id="getFindId" parameterType="java.util.Map" resultType="memberDTO">
+		select * from member where member_name = #{member_name} and member_email = #{member_email}
+	</select>
+	
+	<select id="getFindPwd" parameterType="java.util.Map" resultType="memberDTO">
+		select * from member where member_name = #{member_name} and member_email = #{member_email} and member_id = #{member_id}
+	</select>
+	
+	<update id="resetPwd" parameterType="java.util.Map">
+		update member 
+		set member_pwd = #{pwd}   
+		where member_id = #{member_id} 
+	</update>
+	
+	
+	<select id="login" parameterType="java.util.Map" resultType="memberDTO">
+		select * from member where member_id = #{id} 
+	</select> 	  	   	 
+	
+	<select id="checkAccount" parameterType="java.util.Map" resultType="memberDTO">
+		select * from member where member_name = #{name} and member_id = #{email} 
+	</select>  
+	
+	<select id="checkType" parameterType="memberDTO" resultType="int">
+		select count(*) from member where member_id = ${member_id} and member_loginType = lower(${member_loginType})
+	</select>
+	  
+	<delete id="delete" parameterType="java.util.Map">
+		delete from member where member_id = #{id}
+	</delete>	
+	
+	<insert id="deleteInfo" parameterType="java.util.Map"> 
+		insert into deleteInfo values(#{id} 
+		,nvl(#{deleteInfo_why},'0')		 
+		,nvl(#{deleteInfo_Content},'0')  
+		,sysdate)		  
+	</insert> 
+	
+	<update id = "modify1" parameterType="memberDTO" >
+		update member 
+		set member_name = #{member_name}
+			, member_email = #{member_email}
+			, member_phone = #{member_phone}
+			, member_address1 = #{member_address1}
+			, member_address2 = #{member_address2}
+			, member_birth = nvl(#{member_birth},0)
+			where member_id = #{member_id}
+	</update>
+	
+	<update id = "modify2" parameterType="memberDTO" >
+		update member 
+		set member_name = #{member_name} 
+			, member_pwd = #{member_pwd}
+			, member_email = #{member_email}
+			, member_phone = #{member_phone}
+			, member_address1 = #{member_address1}
+			, member_address2 = #{member_address2}
+			, member_birth = nvl(#{member_birth},0)
+			where member_id = #{member_id}
+	</update> 
+	
+	<!-- dataList -->
+	<select id="getNaverAccount" resultType="int">
+	 	 select count(*) from member where member_logintype = 'naver'
+	 </select>
+	 
+	 <select id="getBitAccount" resultType="int">
+	 	 select count(*) from member where member_logintype = 'bit'
+	 </select>
+	 
+	 <select id="getKakaoAccount" resultType="int">
+	 	 select count(*) from member where member_logintype = 'kakao'
+	 </select>
+	 
+	 <select id="getThisMonthCount" resultType="int">
+	 	select count(*) 
+		from member
+		where member_signupdate between to_date('20200301', 'YYYYMMDD') and to_date('20200401', 'YYYYMMDD')
+	 </select> 
+	 
+	 <select id="getThisMonth" resultType="int">
+		select count(*) 
+		from member
+		where member_signupdate between to_date(TRUNC(sysdate,'MM')) and to_date(ADD_MONTHS(TRUNC(sysdate,'MM'), 1))
+		 
+	 </select>
+	 
+	 <select id="getLastMonth1" resultType="int">
+		select count(*)
+		from member
+		where member_signupdate between to_date(ADD_MONTHS(TRUNC(sysdate,'MM'), -1)) and to_date(TRUNC(sysdate,'MM'))
+	  
+	 </select>
+	 
+	 <select id="getLastMonth2" resultType="int"> 
+	 	select count(*) 
+		from member
+		where member_signupdate between to_date(ADD_MONTHS(TRUNC(sysdate,'MM'), -2)) and to_date(ADD_MONTHS(TRUNC(sysdate,'MM'), -1))	 
+	 </select>
+	   
+	 <select id="getLastMonth3" resultType="int">
+	 	select count(*)
+		from member
+		where member_signupdate between to_date(ADD_MONTHS(TRUNC(sysdate,'MM'), -3)) and to_date(ADD_MONTHS(TRUNC(sysdate,'MM'), -2))		 
+	 </select>
+	 
+	 <select id="weekData"  resultType="int"> 
+	 	select count(*)    
+		from member
+		where member_signupdate between to_char(sysdate-#{i},'yyyymmdd') and to_char(sysdate+1-#{i},'yyyymmdd') 	 	
+	 </select>
+	 
+	 <select id="memberCount" resultType="int"> 
+	 	select count(*) from member  
+	 </select> 
+	 
+	 <select id="sellerCount" resultType="int">
+	 	select count(*) from seller
+	 </select>
+	 
+</mapper>           

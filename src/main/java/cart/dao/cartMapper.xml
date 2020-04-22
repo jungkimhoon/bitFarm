@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cartSQL">
+	<insert id="cartAdd" parameterType="java.util.Map">
+		insert into cart values(#{member_id}, #{member_id}, #{item_id}, #{item_qty}, #{item_all_price})
+	</insert>
+	
+	<select id="cartAllList" parameterType="String" resultType="cartList">
+		select cart_id, member_id, item_id, item_name, item_main_image, item_qty, item_all_price 
+		from cart 
+		join item using(item_id) 
+		where cart_id=#{member_id}
+	</select>
+	
+	<!-- service단에서 for문 돌려서 지움 -->
+	<delete id="cartChoiceDelete" parameterType="java.util.Map">
+		delete from cart where cart_id in (select cart_id from cart where cart_id=#{memberId}) and item_id in #{check}
+	</delete>
+	
+	<!-- 배열 자체를 받아와서 한번에 지우려고했으나 실패쓰; -->
+	<delete id="cartChoiceDelete1" parameterType="java.util.Map">
+	<!-- delete from cart where cart_id in (select cart_id from cart where cart_id='hong') and item_id in '14'; -->
+		delete from cart where cart_id in (select cart_id from cart where cart_id = #{memberId}) and item_id in
+		<foreach collection="check" item="seq" separator="," open="(" close=")">
+			#{check}
+		</foreach>
+	</delete>
+	
+	<select id="cartListAllPrice" parameterType="String" resultType="String">
+		select sum(item_all_price) from cart where cart_id=#{memberId}
+	</select>
+	
+	<select id="isExistInCart" parameterType="java.util.Map" resultType="int">
+		select count(*) from cart where cart_id=#{member_id} and item_id=#{item_id}
+	</select>
+	
+	<update id="cartAddUpdate" parameterType="java.util.Map">
+		update cart set item_qty = item_qty + #{item_qty}, item_all_price = item_all_price + #{item_all_price} 
+		where cart_id = #{member_id} and item_id = #{item_id}
+	</update>
+	
+	<update id="updateCart" parameterType="java.util.Map">
+		update cart set item_qty = #{item_qty}, item_all_price = #{item_all_price}
+		where cart_id = #{member_id} and item_id = #{item_id}
+	</update>
+	
+	
+</mapper>

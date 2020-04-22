@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="informationSQL" >
+	<!-- QnABoard (informationQnA)  -->
+	<insert id="infoQnABoardWrite" parameterType="informationQnADTO">
+		insert into QnABoard values(QnABoard_SEQ.nextval,
+									#{infoQnA_type},
+									#{infoQnA_subject},
+									#{infoQnA_userID}, 
+									nvl(#{infoQnA_orderNum}, '0'),   
+									nvl(#{infoQnA_email}, '0'),
+									nvl(#{infoQnA_phone}, '0'),
+									#{infoQnA_content},
+									nvl(#{infoQnA_imageName},'0'), 
+									sysdate, 
+									0,   
+									0,
+									sysdate)	   
+	</insert> 
+	
+	<select id="getInfoList" parameterType="java.util.Map" resultType="informationQnADTO">
+		<![CDATA[ 
+		select * from (select rownum rn, tt.* from (select * from QnABoard order by infoQnA_seq desc)tt)where rn>=#{startNum} and rn<=#{endNum} and infoQnA_userid = #{memberId}
+		]]> 
+	</select> 	 
+	
+	<select id="getInfoListADMIN" parameterType="java.util.Map" resultType="informationQnADTO">
+		<![CDATA[ 
+		select * from QnABoard 
+		where infoQnA_answerSubject = '0' 
+		order by infoQnA_seq
+		]]>  
+	</select> 	 
+	
+	<select id="infoQnAListAllADMIN" parameterType="java.util.Map" resultType="informationQnADTO">
+		<![CDATA[ 
+		select * from (select rownum rn, tt.* from (select * from QnABoard order by infoQnA_seq desc)tt) where rn>=#{startNum} and rn<=#{endNum} 
+		]]> 
+	</select>   
+	
+	<select id="infoALLADMIN" resultType="informationQnADTO"> 
+		select * from QnABoard 
+	</select> 
+	 		      
+	<update id="upHit" parameterType="String">
+	 update information set information_views = information_views+1 where information_number = ${seq}  
+	 </update>
+	 
+	<select id="writeQnAAnswer" parameterType="String" resultType="informationQnADTO">
+		select * from QnABoard where infoQnA_seq = #{seq}
+	</select>
+	
+	<update id="answerWrite" parameterType="java.util.Map">
+		update QnABoard
+		set infoQnA_answerSubject = #{infoQnA_answerSubject},
+		infoQnA_answerContent = #{infoQnA_answerContent},
+		infoQnA_answerDate = sysdate 
+		where infoQnA_seq = #{seq}   
+	</update>
+	
+	<select id="infoQnAListAllADMINPagingTotalA" resultType="int"><!-- 값 ? 에 넣는 타입  --><!--user.bean.UserDTO => user로 사용 mybatis-config.xml  -->
+		select count(*) from QnABoard 
+	</select>  
+	
+	<select id="qnaPaging" parameterType="java.util.Map" resultType="int"><!-- 값 ? 에 넣는 타입  --><!--user.bean.UserDTO => user로 사용 mybatis-config.xml  -->
+		select count(*) from QnABoard where infoQnA_userId = #{memberId} 
+	</select>   
+	
+	<!-- information (공지사항) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<insert id="infoWrite" parameterType="informationDTO">
+		insert into information values(information_SEQ.nextval,
+								#{information_subject},
+								#{information_name},
+								sysdate,
+								0,
+								nvl(#{information_imageName},0),
+								#{information_content}) 
+	</insert>
+	
+	<select id="infoBoardList" parameterType="java.util.Map" resultType="informationDTO">
+		<![CDATA[ 
+		select * from (select rownum rn, tt.* from (select * from information order by information_number desc)tt)where rn>=#{startNum} and rn<=#{endNum}
+		]]> 
+	</select>
+	
+	<select id="infoView" parameterType="String" resultType="informationDTO">
+		select * from information where information_number = #{seq}
+	</select> 	 
+	
+	<delete id="deleteInfo" parameterType="String">
+		delete information where information_number = #{seq} 
+	</delete>
+	
+	<select id="informationTotalA" resultType="int"><!-- 값 ? 에 넣는 타입  --><!--user.bean.UserDTO => user로 사용 mybatis-config.xml  -->
+		select count(*) from information 
+	</select>  
+	
+	<select id="getInfoSearch" parameterType="java.util.Map" resultType="informationDTO">
+		<![CDATA[
+			select * from  
+			(select rownum rn, tt.* from
+			(select * from information where ${searchOption} like '%'||#{keyword}||'%'
+			) tt 
+			)where rn >= #{startNum} and rn<= #{endNum} 
+		]]>     
+	</select>
+	 
+	<select id="getInfoSearchTotalA" parameterType="Map" resultType="int">
+		select count(*) from information where ${searchOption} like '%'||#{keyword}||'%'  
+	</select> 
+	
+	<select id="orderForm" parameterType="java.util.Map" resultType="String">
+		select distinct(order_id) from purchase where order_user_id = #{id}  
+	</select>
+	
+</mapper>  

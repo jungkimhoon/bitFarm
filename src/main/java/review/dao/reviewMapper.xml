@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reviewSQL">
+
+	<select id="getItemReviewList" parameterType="int" resultType="review">
+		select * from review where item_id=#{item_id} order by review_id desc
+	</select>
+
+	<select id="getItemDTO" parameterType="String" resultType="item">
+		select * from item where item_id=#{item_id}
+	</select>
+	
+	<insert id="reviewWrite" parameterType="review">
+		insert into review values(review_seq.nextval, 
+								#{review_subject}, 
+								#{review_content}, 
+								nvl(#{review_image},0), 
+								#{review_user_id}, 
+								sysdate, 
+								#{item_id})
+	</insert>
+	
+</mapper>
