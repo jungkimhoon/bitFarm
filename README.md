@@ -25,6 +25,6 @@ Spring Framework를 사용하여 제작했습니다.<br>
 
 <img src="https://user-images.githubusercontent.com/59942147/79984394-0e90c500-84e4-11ea-9bc6-c99611e6a744.png" width="80%"></img><br>
 
-<https://user-images.githubusercontent.com/59942147/79984416-17819680-84e4-11ea-9b63-f8b8a1bc871d.png" width="80%"></img><br>
+<img src="https://user-images.githubusercontent.com/59942147/79984416-17819680-84e4-11ea-9b63-f8b8a1bc871d.png" width="80%"></img><br>
 <img src="https://user-images.githubusercontent.com/59942147/79983548-e48ad300-84e2-11ea-809f-b533f401e15f.png" width="80%"></img><br>
 <img src="https://user-images.githubusercontent.com/59942147/79983574-f1a7c200-84e2-11ea-9f99-7ff07f9d97c1.png" width="80%"></img><br>
