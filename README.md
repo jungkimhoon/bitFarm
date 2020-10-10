@@ -1,5 +1,7 @@
 # 비트농장
 
+
+<img src="https://user-images.githubusercontent.com/59942147/95650153-a8910c00-0b1c-11eb-8574-680fd8a5014a.png" width="80%"></img><br>
 농축산물 쇼핑몰 비트농장입니다.<br>
 Spring Framework를 사용하여 제작했습니다.<br>
 <img src="https://user-images.githubusercontent.com/59942147/79969026-e4cba400-84cb-11ea-8483-eee0d88ccb46.png" width="80%"></img><br>
